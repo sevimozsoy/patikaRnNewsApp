@@ -20,9 +20,9 @@ function App() {
       <ScrollView horizontal>
         {news_banner_data.map(bannerNews => (
           <Image
-            style={styles.banner_image}
+            style={styles.news_banner}
             source={{uri: bannerNews.imageUrl}}
-            key={bannerNews.id}
+            key={bannerNews.id.toString()}
           />
         ))}
       </ScrollView>
