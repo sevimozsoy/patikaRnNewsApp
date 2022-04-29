@@ -9,24 +9,18 @@ import {
 } from 'react-native';
 import news_data from './src/news_data.json';
 import NewsCard from './src/components/NewsCard';
-import news_banner_data from './src/news_banner_data.json';
+import NewsBanner from './src/components/NewsBanner/NewsBanner';
 
 function App() {
-  const renderNews = ({item}) => <NewsCard news={item} />;
+  const renderNews = ({ item }) => <NewsCard news={item} />;
   const itemIds = item => item.u_id.toString();
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
-        {news_banner_data.map(bannerNews => (
-          <Image
-            style={styles.news_banner}
-            source={{uri: bannerNews.imageUrl}}
-            key={bannerNews.id.toString()}
-          />
-        ))}
-      </ScrollView>
       <FlatList
+        ListHeaderComponent={() =>
+        <NewsBanner/>  
+        }
         keyExtractor={itemIds}
         data={news_data}
         renderItem={renderNews}
@@ -39,11 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#eceff1',
-  },
-  news_banner: {
-    height: Dimensions.get('window').height / 5,
-    width: Dimensions.get('window').width / 2,
-  },
+  }
 });
 
 export default App;
